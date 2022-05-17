@@ -28,8 +28,6 @@ int main()
 {
     int arr[4] = {1, 2, 3, 4};
     Node *first = create(arr, 4);
-    Node *x = search(first, 3);
-    display(x);
-    printf("-----------\n");
+    insert(first, 0, 5);
     display(first);
 }

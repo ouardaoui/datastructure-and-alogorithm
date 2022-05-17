@@ -12,4 +12,5 @@ int count(Node *list);
 int sum(Node *list);
 int max(Node *list);
 Node *search(Node *list, int key);
+void insert(Node *list, int i, int value);
 #endif

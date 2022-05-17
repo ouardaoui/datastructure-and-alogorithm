@@ -4,20 +4,18 @@
 Node *search(Node *list, int key)
 {
     Node *p;
-    Node *l;
-    l = list;
-    p = l->next;
-    while (l)
+    p = list;
+    int data;
+    while (p)
     {
         if (p->data == key)
         {
-            l->next = p->next;
-            p->next = list->next;
-            list = p;
+            data = p->data;
+            p->data = list->data;
+            list->data = data;
             return list;
         }
         p = p->next;
-        l = l->next;
     }
     return NULL;
 }
