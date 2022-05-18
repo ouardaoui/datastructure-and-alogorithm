@@ -28,6 +28,10 @@ int main()
 {
     int arr[4] = {1, 2, 3, 4};
     Node *first = create(arr, 4);
-    insert(first, 0, 5);
+    insert(first, 1, 5);
+    display(first);
+    printf("\n");
+    int x = ft_delete(first, 2);
+    printf("%d\n", x);
     display(first);
 }
