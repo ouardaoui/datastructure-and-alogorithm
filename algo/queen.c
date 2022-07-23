@@ -5,7 +5,7 @@ int is_valide(char *s)
 {
         int i;
         int j = 0;
-        char x;
+	char x;
         while(j < 9)
         {
                 i  = j + 1;
