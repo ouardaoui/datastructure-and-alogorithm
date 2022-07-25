@@ -1,4 +1,5 @@
 #include<stdio.h>
+int *data(void);
 
 int merge(int *a,int *b,int len_a,int len_b,int *result){
 	int i = 0 ;
@@ -71,10 +72,11 @@ int mergeSort(int *a,int len)
 
 
 int main(){
-	int a[] = {1,3,2,6,5};
+	int *a = data();
 	int i = 0;
-	int c;
+	int c;	
 	int len = sizeof(a)/sizeof(int);
+	printf("----------len is %d\n",len);
 	c = mergeSort(a,len);
 	printf("inversion %d\n",c);
 	while(i < len )
