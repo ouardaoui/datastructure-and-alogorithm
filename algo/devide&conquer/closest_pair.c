@@ -6,7 +6,8 @@ struct Point {
     int x,y;
 };
 
-float stripClosesest(struct Point S[],int n ,float d);
+float stripClosesest(struct Point P[],int n ,float d,int mid);
+
 float min(float a, float b)
 {
     float m = (a < b) ? a : b ;
@@ -65,56 +66,50 @@ void sort(struct Point *P,int n){
     }
 }
 
+void Strip(struct Point P[],int mid,float d,int n,int *k,struct Point *S)
+{
+    int i = 0;
+    int j = 0;
+    sort(P,n);
+    while(i < n)
+    {
+         if(f_abs(P[i].x ,P[mid].x) < d)
+         {
+            S[j]  = P[i];
+            j++;
+         }
+         i++;   
+    }
+    *k = j;
+}
+
 float closest(struct Point P[],int n)
 {
     sort(P,n);
     if(n  <= 3)
          return brute_force(P,n);
     int mid = n/2;
-    int i =  0;
-    int j = 0;
-    float S = 0;
     struct Point Strip[n];
     struct Point middle = P[mid];
     float dl = closest(P,mid);
     float dr = closest(P + mid, mid);
-    float d = min(dl,dr);
-    while(i < n )
-    {
-        if(f_abs(middle.x, P[i].x) < d)
-        {
-            Strip[j] = P[i];
-            j++;
-        }
-        i++;
-    }
-    S = stripClosesest(Strip,3,d);
-    return min(d,S);
+    float sd = min(dl,dr);
+    float d = min(sd,stripClosesest(P,n,sd,mid));
+    return d;
 }
 
-float stripClosesest(struct Point S[],int n ,float d)
+float stripClosesest(struct Point P[],int n ,float d,int mid)
 {
-    sort(S,n);
-    float m = d;
+    int j;
     int i = 0;
-    int j ;
-    while(i < n)
-    {
-        j = i + 1;
-        while(j < n - 1)
-        {
-            if(dist(S[i],S[j]) < m)           
-                m =  dist(S[i],S[j]) ;
-            j++;
-        }
-        i++;
-    }
-    return m;
+    struct Point S[n];
+    Strip(P,mid,d,n,&j,S) ;
+    return brute_force(S,j);
 }
 
 void main()
 {
-    struct Point P[] = {{2, 3}, {12, 30}, {40, 50}, {5, 1}, {12, 10}, {3, 4}};
+    struct Point P[] = {{2, 3}, {12, 30}, {5, 7}, {5, 10}, {12, 10}, {3, 4},{5, 8}, {3, 2} ,{8, 4}, {3, 6}, {6, 9}, {4, 9}};
     int n = sizeof(P) / sizeof(P[0]);
     float x = closest(P,n);
     printf("%f\n",x);
