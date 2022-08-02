@@ -9,4 +9,4 @@ const gridTraver = (n,m,memo = {}) => {
 	return memo[key];
 }
 
-console.log(gridTraver(18,18))
+console.log(gridTraver(10,9))
